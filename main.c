@@ -13,7 +13,7 @@ typedef struct {
 int userRegister(){ // Cria um usuário por vez
     cadastro users_temp;
     scanf("%100[^,], %u, %f", &users_temp.nome,&users_temp.idade, &users_temp.saldo); setbuf(stdin,NULL);
-    printf("%s, %d, %.2f\n", users_temp.nome, users_temp.idade, users_temp.saldo);
+    //printf("%s, %d, %.2f\n", users_temp.nome, users_temp.idade, users_temp.saldo);
     writeUser(users_temp);
     return 0;
 }
@@ -59,7 +59,7 @@ int saveAllUsers(cadastro* c, int numUsers){ // Função para salvar o arquivo i
     FILE* usuariosArquivo = fopen("usuarios.txt", "w");
     for (int i = 0; i < numUsers; i++){
         fprintf(usuariosArquivo, "%s, %d, %.2f\n", c[i].nome,c[i].idade, c[i].saldo);
-        printf("%s, %d, %.2f\n", c[i].nome, c[i].idade, c[i].saldo);
+        //printf("%s, %d, %.2f\n", c[i].nome, c[i].idade, c[i].saldo);
     }
     fclose(usuariosArquivo);
     return 0;
@@ -79,7 +79,6 @@ int main()
     printf(" 4 Transferências entre usuários: ");
     printf("\n================================================ \n");
     printf(" 5 Remoção de um usuário por id: \n\n");
-    
 
 
 
@@ -111,7 +110,9 @@ int main()
             int lines = getLines(usuariosArquivo);
             int p;
             scanf("%d",&p);
-            printf("%s, %d, %.2f\n", users[p].nome, users[p].idade, users[p].saldo); // Mostra o usuários de ID p
+            if (p<lines){
+                printf("%s, %d, %.2f\n", users[p].nome, users[p].idade, users[p].saldo);
+            }  // Mostra o usuários de ID p
             fclose(usuariosArquivo);
             printf("\n================================================ \n");
 
@@ -120,7 +121,7 @@ int main()
             puts("4");
             int idO, idD;
             float quant;
-            scanf("%u,%u,%f", &idO, &idD, &quant); //Separados 
+            scanf("%u,%u,%f", &idO, &idD, &quant); //Separados por virgula
             cadastro* users;
             users = openFile();
             users[idO].saldo -= quant;

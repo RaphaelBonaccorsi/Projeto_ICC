@@ -69,6 +69,19 @@ int main()
 {
     setlocale(LC_ALL,"");
     printf("UAIBANK\n");
+    printf(" 1 Inserção de um novo usuário: ");
+    //Inserção de usurarios deverá ser feita separado por virgula.
+    printf("\n================================================ \n");
+    printf(" 2 Inserção de vários usuários: ");
+    printf("\n================================================ \n");
+    printf(" 3 Busca de um usuário por id: ");
+    printf("\n================================================ \n");
+    printf(" 4 Transferências entre usuários: ");
+    printf("\n================================================ \n");
+    printf(" 5 Remoção de um usuário por id: \n\n");
+    
+
+
 
     char opt = 0;
     do {
@@ -76,6 +89,8 @@ int main()
         if (opt == '1'){
             puts("1");
             userRegister(1);
+            printf("\n================================================ \n");
+
         }
         if (opt == '2'){
             puts("2");
@@ -84,6 +99,8 @@ int main()
             for (int i = 0; i < rep; i++){ // Chama a função de registro quantas vezes desejado
                 userRegister();
             }
+            printf("\n================================================ \n");
+
         }
         if (opt == '3'){
             puts("3");
@@ -92,16 +109,18 @@ int main()
             cadastro* users;
             users = openFile();
             int lines = getLines(usuariosArquivo);
-            for (int i = 0; i < lines; i++){
-                printf("%s, %d, %.2f\n", users[i].nome, users[i].idade, users[i].saldo); // Mostra todos os usuários
-            }
+            int p;
+            scanf("%d",&p);
+            printf("%s, %d, %.2f\n", users[p].nome, users[p].idade, users[p].saldo); // Mostra o usuários de ID p
             fclose(usuariosArquivo);
+            printf("\n================================================ \n");
+
         }
         if (opt == '4'){
             puts("4");
             int idO, idD;
             float quant;
-            scanf("%u %u %f", &idO, &idD, &quant);
+            scanf("%u,%u,%f", &idO, &idD, &quant); //Separados 
             cadastro* users;
             users = openFile();
             users[idO].saldo -= quant;
@@ -110,6 +129,7 @@ int main()
             int lines = getLines(usuariosArquivo);
             fclose(usuariosArquivo);
             saveAllUsers(users, lines);
+            printf("\n================================================ \n");
 
         }
         if (opt == '5'){
@@ -125,6 +145,8 @@ int main()
             int lines = getLines(usuariosArquivo);
             fclose(usuariosArquivo);
             saveAllUsers(users, lines);
+            printf("\n================================================ \n");
+
         }
     } while(opt != 0x08 && opt != 0x1B); // Encerra o programa quando apertar ESC ou Backspace
 
